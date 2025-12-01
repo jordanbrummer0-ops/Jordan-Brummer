@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ChatInterface from './components/ChatInterface';
 import GuideCard from './components/GuideCard';
 import DisclaimerModal from './components/DisclaimerModal';
+import LiveTechnicianModal from './components/LiveTechnicianModal';
 import { STATIC_GUIDES, POPULAR_MODELS } from './constants';
 import { AppView, Guide, DeviceModel } from './types';
 
@@ -15,6 +16,7 @@ const App: React.FC = () => {
   const [selectedDevice, setSelectedDevice] = useState<DeviceModel | null>(null);
   const [deviceSearch, setDeviceSearch] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isLiveModalOpen, setIsLiveModalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,7 +65,10 @@ const App: React.FC = () => {
       case AppView.CHAT:
         return (
           <div className="h-[calc(100vh-140px)] w-full max-w-4xl mx-auto">
-            <ChatInterface selectedDevice={selectedDevice} />
+            <ChatInterface 
+              selectedDevice={selectedDevice} 
+              onOpenLive={() => setIsLiveModalOpen(true)}
+            />
           </div>
         );
       case AppView.GUIDES:
@@ -225,6 +230,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-mi-dark to-slate-900 text-slate-200 font-sans selection:bg-mi-orange selection:text-white">
       {!hasAcceptedDisclaimer && <DisclaimerModal onAccept={handleDisclaimerAccept} />}
+      {isLiveModalOpen && <LiveTechnicianModal onClose={() => setIsLiveModalOpen(false)} />}
       
       {/* Header */}
       <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-slate-900/80 border-b border-slate-800">

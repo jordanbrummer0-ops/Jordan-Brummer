@@ -14,12 +14,20 @@ export interface Guide {
   updatedAt: string;
 }
 
+export interface GroundingChunk {
+  web?: {
+    uri: string;
+    title: string;
+  };
+}
+
 export interface ChatMessage {
   id: string;
   role: 'user' | 'model';
   content: string;
   timestamp: number;
   isThinking?: boolean;
+  groundingChunks?: GroundingChunk[];
 }
 
 export enum AppView {

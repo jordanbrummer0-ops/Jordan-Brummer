@@ -1,5 +1,7 @@
 {
   "name": "MiUnlocker AI",
   "description": "An intelligent assistant and knowledge base for recovering access to Xiaomi and Redmi devices, specifically focusing on FRP (Factory Reset Protection) educational guides and troubleshooting.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }
